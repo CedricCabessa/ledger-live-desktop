@@ -18,6 +18,7 @@ import {
   getMainAccount,
   shortAddressPreview,
   getAccountName,
+  isAccountZk,
 } from "@ledgerhq/live-common/lib/account";
 import Box, { Tabbable } from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -162,6 +163,12 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
   const mainAccount = getMainAccount(account, parentAccount);
   const explorerView = getDefaultExplorerView(mainAccount.currency);
 
+  // TODO: how do we call a function?
+  //const [isZk, setIsZk] = useState(false);
+  //isAccountZk(account.address).then(e = setIsZk(e))
+  const isZk = true;
+
+
   const getContract = () =>
     account.type === "TokenAccount" && parentAccount
       ? getAccountContractExplorer(explorerView, account, parentAccount)
@@ -202,7 +209,7 @@ const AccountHeader: React$ComponentType<Props> = React.memo(function AccountHea
   return (
     <Box horizontal shrink alignItems="center" flow={3}>
       <Box>
-        <ParentCryptoCurrencyIcon currency={currency} bigger />
+        <ParentCryptoCurrencyIcon currency={currency} isZk={isZk} bigger />
       </Box>
       <Box style={{ alignItems: "flex-start", flex: 1 }}>
         {contract && account.type === "TokenAccount" ? (

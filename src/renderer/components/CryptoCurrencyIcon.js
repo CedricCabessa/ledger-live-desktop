@@ -67,7 +67,15 @@ const Container = styled.div`
   }
 `;
 
-const CryptoCurrencyIcon = ({ currency, circle, size, overrideColor, inactive, theme }: Props) => {
+
+//TODO: nice icon here
+const ZKIcon = styled.div`
+  background-color: red;
+  width: 48px;
+  height: 48px;
+`;
+
+const CryptoCurrencyIcon = ({ currency, circle, size, overrideColor, inactive, theme, isZk=false}: Props) => {
   const currencyColor = useCurrencyColor(currency, theme.colors.palette.background.paper);
   const color = overrideColor || (inactive ? theme.colors.palette.text.shade60 : currencyColor);
 
@@ -85,6 +93,14 @@ const CryptoCurrencyIcon = ({ currency, circle, size, overrideColor, inactive, t
       </TokenIconWrapper>
     );
   }
+  if (isZk) {
+    return (
+        <TokenIconWrapper>
+          <ZKIcon/>
+        </TokenIconWrapper>
+      );
+  }
+
   const IconCurrency = getCryptoCurrencyIcon(currency);
   return IconCurrency ? (
     circle ? (
